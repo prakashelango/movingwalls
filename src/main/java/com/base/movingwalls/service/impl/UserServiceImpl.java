@@ -1,7 +1,7 @@
 package com.base.movingwalls.service.impl;
 
-import com.base.movingwalls.dao.UserDao;
 import com.base.movingwalls.model.User;
+import com.base.movingwalls.repository.UserRepository;
 import com.base.movingwalls.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +19,7 @@ import java.util.List;
 public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Autowired
-	private UserDao userDao;
+	private UserRepository userDao;
 
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		User user = userDao.findByUsername(userId);

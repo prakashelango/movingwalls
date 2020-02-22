@@ -1,0 +1,1 @@
+INSERT INTO user (age, first_name, last_name, password, salary, username) values (23, 'ADMIN', 'ADMIN', '$2a$04$EZzbSqieYfe/nFWfBWt2KeCdyq0UuDEM1ycFF8HzmlVR6sbsOnw7u', 12345, 'ADMIN');
