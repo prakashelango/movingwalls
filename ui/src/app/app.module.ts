@@ -9,6 +9,7 @@ import {AppComponent} from './app.component';
 import {appRoutingModule} from './app.routing';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
+import {TopnavbarComponent} from './topnavbar/topnavbar.component'
 
 @NgModule({
   imports: [
@@ -20,8 +21,8 @@ import {LoginComponent} from './login';
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
-  ],
+    LoginComponent,
+    TopnavbarComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
