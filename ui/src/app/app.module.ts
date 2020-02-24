@@ -9,13 +9,15 @@ import {AppComponent} from './app.component';
 import {appRoutingModule} from './app.routing';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    appRoutingModule
+    appRoutingModule,
+    MDBBootstrapModule.forRoot()
   ],
   declarations: [
     AppComponent,
