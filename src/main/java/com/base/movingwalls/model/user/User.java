@@ -1,4 +1,4 @@
-package com.base.movingwalls.model;
+package com.base.movingwalls.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
