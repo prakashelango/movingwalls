@@ -2,14 +2,18 @@
 import {first} from 'rxjs/operators';
 
 import {User} from '@app/_models';
-import {UserService} from '@app/_services';
+import {AuthenticationService, UserService} from '@app/_services';
+import {Router} from '@angular/router';
 
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent {
   loading = false;
   users: User[];
+  currentUser: User;
 
-  constructor(private userService: UserService) {
+  constructor(private router: Router,
+              private authenticationService: AuthenticationService, private userService: UserService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit() {
@@ -18,5 +22,10 @@ export class HomeComponent {
       this.loading = false;
       this.users = users;
     });
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }
