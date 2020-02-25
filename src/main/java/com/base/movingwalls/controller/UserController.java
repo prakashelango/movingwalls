@@ -1,9 +1,7 @@
 package com.base.movingwalls.controller;
 
-import com.base.movingwalls.model.user.User;
 import com.base.movingwalls.model.user.UserInfo;
 import com.base.movingwalls.repository.UserRepository;
-import com.base.movingwalls.service.UserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static com.base.movingwalls.service.impl.UserServiceFacade.*;
 import static provider.DeferredResultProvider.createDeferredResult;
 import static provider.DeferredResultProvider.createDeferredResultTwoTrack;
 
@@ -25,9 +24,6 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserService userService;
 
     @ApiOperation(
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -69,8 +65,7 @@ public class UserController {
     @ApiOperation(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
-            value = "Get User by id",
-            notes = "Get User Details by id")
+            value = "Get User by id", notes = "Get User Details by id")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public DeferredResult<ResponseEntity<UserInfo>> get(
             @ApiParam(value = "User id", name = "id")
@@ -78,10 +73,10 @@ public class UserController {
         return createDeferredResultTwoTrack(find(id).with(userRepository), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public User findOne(@PathVariable long id) {
         return userService.findOne(id);
-    }
+    }*/
 
     @ApiOperation(
             produces = MediaType.APPLICATION_JSON_VALUE,

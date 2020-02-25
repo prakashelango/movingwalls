@@ -1,39 +1,96 @@
 package com.base.movingwalls.model.user;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-@ApiModel("User Info details")
-@Getter
-public class UserInfo implements Serializable {
+public class UserInfo implements UserDetails {
 
-    private static final long serialVersionUID = -7597602634402038857L;
-    @ApiModelProperty(value = "First Name", required = true)
-    private String firstName;
-    @ApiModelProperty(value = "Last Name", required = true)
-    private String lastName;
-    @ApiModelProperty(value = "User Name", required = true, example = "User's Preferred Name to maintain")
-    private String userName;
-    @ApiModelProperty(value = "Password", required = true)
+    static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(notes = "The database generated user, token and session mapping ID.")
+    private Long id;
+
+    @ApiModelProperty(notes = "user name")
+    private String username;
+
+    @ApiModelProperty(notes = "User password")
     private String password;
-    @ApiModelProperty(value = "Salary", required = true, example = "Number Representing User's Salary 10000")
-    private long salary;
-    @ApiModelProperty(value = "Age", required = true, example = "Number Representing user's age ex: 32")
-    private int age;
 
-    public UserInfo() {
+    @ApiModelProperty(notes = "Indicates whether the user is enabled or disabled. A disabled user cannot be authenticated.")
+    private boolean enabled;
+
+    @ApiModelProperty(notes = "The database generated user, token and session mapping created time.")
+    private LocalDateTime createdTime;
+
+    @ApiModelProperty(notes = "The database generated user, token and session mapping updated time.")
+    private LocalDateTime updatedTime;
+
+    @PrePersist
+    protected void onCreate() {
+        createdTime = LocalDateTime.now();
+        updatedTime = LocalDateTime.now();
     }
 
-    public UserInfo(final String firstName, final String lastName, final String userName, final String password, final long salary, final int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.salary = salary;
-        this.age = age;
+    @PreUpdate
+    protected void onUpdate() {
+        updatedTime = LocalDateTime.now();
     }
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public LocalDateTime getUpdatedTime() {
+        return updatedTime;
+    }
 }

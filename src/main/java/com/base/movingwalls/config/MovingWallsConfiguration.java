@@ -1,16 +1,21 @@
 package com.base.movingwalls.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpHeaders;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.ApiKeyVehicle;
+import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
@@ -25,9 +30,8 @@ import java.util.List;
 @EnableSwagger2
 public class MovingWallsConfiguration {
 
-    final String accessTokenUri = "http://localhost:8071/movingwalls/api/oauth/token";
-    final String clientId = "devglan-client";
-    final String clientSecret = "$2a$04$e/c1/RfsWuThaWFCrcCuJeoyvwCV0URN/6Pn9ZFlrtIWaU/vj/BfG";
+    @Value("${config.oauth2.accessTokenUri}")
+    private String accessTokenUri;
 
     @Bean
     public Docket MovingWallsAPI() {
@@ -38,10 +42,21 @@ public class MovingWallsConfiguration {
                         .version("0.1.0")
                         .build())
                 .select()
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(Collections.singletonList(securityContext()))
-                .securitySchemes(Arrays.asList(securitySchema()));
+                .securitySchemes(Arrays.asList(securitySchema(), apiKey(), apiCookieKey()));
+    }
+
+    @Bean
+    public SecurityScheme apiKey() {
+        return new ApiKey(HttpHeaders.AUTHORIZATION, "apiKey", "header");
+    }
+
+    @Bean
+    public SecurityScheme apiCookieKey() {
+        return new ApiKey(HttpHeaders.COOKIE, "apiKey", "cookie");
     }
 
     private OAuth securitySchema() {
@@ -67,6 +82,13 @@ public class MovingWallsConfiguration {
         authorizationScopes[0] = new AuthorizationScope("read", "read all");
         authorizationScopes[1] = new AuthorizationScope("trust", "trust all");
         authorizationScopes[2] = new AuthorizationScope("write", "write all");
-        return Collections.singletonList(new SecurityReference("oauth2schema", authorizationScopes));
+
+        return Collections.singletonList(new SecurityReference("oauth2", authorizationScopes));
+    }
+
+    @Bean
+    public SecurityConfiguration security() {
+        return new SecurityConfiguration
+                ("client", "secret", "", "", "Bearer access token", ApiKeyVehicle.HEADER, HttpHeaders.AUTHORIZATION, "");
     }
 }
