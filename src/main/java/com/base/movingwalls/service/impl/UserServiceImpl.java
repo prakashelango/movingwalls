@@ -1,6 +1,6 @@
 package com.base.movingwalls.service.impl;
 
-import com.base.movingwalls.model.User;
+import com.base.movingwalls.model.user.User;
 import com.base.movingwalls.repository.UserRepository;
 import com.base.movingwalls.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.base.movingwalls.service;
 
-import com.base.movingwalls.model.User;
+import com.base.movingwalls.model.user.User;
 
 import java.util.List;
 
