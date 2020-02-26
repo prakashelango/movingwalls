@@ -1,6 +1,6 @@
-package com.base.movingwalls.service.impl;
+package com.base.movingwalls.service.impl.user;
 
-import com.authentication.model.UserTokenSession;
+import com.base.movingwalls.model.user.UserTokenSession;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 

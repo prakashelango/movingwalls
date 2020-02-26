@@ -1,4 +1,4 @@
-package com.base.movingwalls.service.impl;
+package com.base.movingwalls.service.impl.user;
 
 
 import com.base.movingwalls.model.user.User;

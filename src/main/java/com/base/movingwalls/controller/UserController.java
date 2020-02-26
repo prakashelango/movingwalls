@@ -13,12 +13,12 @@ import org.springframework.web.context.request.async.DeferredResult;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static com.base.movingwalls.service.impl.UserServiceFacade.*;
+import static com.base.movingwalls.service.impl.user.UserServiceFacade.*;
 import static provider.DeferredResultProvider.createDeferredResult;
 import static provider.DeferredResultProvider.createDeferredResultTwoTrack;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/oauth")
 @Api(value = "Api Provides Users Details")
 public class UserController {
 

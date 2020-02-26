@@ -17,17 +17,16 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id", nullable = false, updatable = false)
-    private long id;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
-    @Column
+    private Long id;
+
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
-    @Column
+
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column
-    private boolean enabled;
+
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
 
     @Column(name = "created_time", insertable = true, updatable = false)
     private LocalDateTime createdTime;

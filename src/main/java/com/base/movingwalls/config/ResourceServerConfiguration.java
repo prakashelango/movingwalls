@@ -16,9 +16,10 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final Logger LOGGER = Logger.getLogger(ResourceServerConfig.class);
+    private static final Logger LOGGER = Logger.getLogger(ResourceServerConfiguration.class);
+
 
     @Value("${config.oauth2.publicKey}")
     private String publicKey;

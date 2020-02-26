@@ -1,4 +1,4 @@
-package com.base.movingwalls.service.impl;
+package com.base.movingwalls.service.impl.user;
 
 import com.base.movingwalls.common.core.*;
 import com.base.movingwalls.model.user.User;
@@ -12,11 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class UserServiceFacade implements UserDetailsService {
 
-	private static final Predicate<List> collectionNotEmptyPredicate = coll -> !coll.isEmpty() && coll.size() > 0;
 	@Autowired
 	private UserRepository userDao;
 
@@ -82,7 +80,7 @@ public class UserServiceFacade implements UserDetailsService {
 	}
 
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		User user = userDao.findByUsername(userId);
+		User user = userDao.findOneByUsername(userId);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}

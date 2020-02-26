@@ -1,4 +1,4 @@
-package com.base.movingwalls.service.impl;
+package com.base.movingwalls.service.impl.user;
 
 import com.base.movingwalls.common.core.Builder;
 import com.base.movingwalls.model.user.User;
@@ -10,31 +10,28 @@ public class UserConverter {
         return User.builder()
                 .on(user -> user.getUsername())
                 .set(source.getUsername())
-                .on(user -> user.getAuthorities())
-                .set(source.getAuthorities())
+                .on(user -> user.getCreatedTime())
+                .set(source.getCreatedTime())
                 .on(user -> user.getPassword())
                 .set(source.getPassword())
                 .on(user -> user.getPassword())
                 .set(source.getPassword())
-                .on(user -> user.getSalary())
-                .set(source.getSalary())
                 .build();
     }
 
 
     public static UserInfo convertTo(final User source) {
-        return new UserInfo(source.getFirstName(), source.getLastName(), source.getUsername(), source.getPassword(), source.getSalary(), source.getAge());
+        return new UserInfo(source.getUsername(), source.getPassword(), source.isEnabled(), source.getCreatedTime(), source.getUpdatedTime());
     }
 
     public static UserInfo convertToInfo(final User source) {
         return Builder.of(UserInfo.class)
                 .with(UserInfo::getId, source.getId())
-                .with(UserInfo::getFirstName, source.getFirstName())
-                .with(UserInfo::getLastName, source.getLastName())
-                .with(UserInfo::getAge, source.getAge())
+                .with(UserInfo::getUsername, source.getUsername())
                 .with(UserInfo::getPassword, source.getPassword())
-                .with(UserInfo::getSalary, source.getSalary())
-                .with(UserInfo::getSalary, source.getUsername())
+                .with(UserInfo::isEnabled, source.isEnabled())
+                .with(UserInfo::getCreatedTime, source.getCreatedTime())
+                .with(UserInfo::getUpdatedTime, source.getUpdatedTime())
                 .build();
     }
 
@@ -42,18 +39,16 @@ public class UserConverter {
         return User.builder()
                 .on(category -> category.getId())
                 .set(id)
-                .on(category -> category.getFirstName())
-                .set(source.getFirstName())
-                .on(category -> category.getLastName())
-                .set(source.getLastName())
                 .on(category -> category.getUsername())
-                .set(source.getUserName())
+                .set(source.getUsername())
                 .on(category -> category.getPassword())
                 .set(source.getPassword())
-                .on(category -> category.getSalary())
-                .set(source.getSalary())
-                .on(category -> category.getAge())
-                .set(source.getAge())
+                .on(category -> category.isEnabled())
+                .set(source.isEnabled())
+                .on(category -> category.getCreatedTime())
+                .set(source.getCreatedTime())
+                .on(category -> category.getUpdatedTime())
+                .set(source.getUpdatedTime())
                 .build();
     }
 

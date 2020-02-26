@@ -93,4 +93,15 @@ public class UserInfo implements UserDetails {
     public LocalDateTime getUpdatedTime() {
         return updatedTime;
     }
+
+    public UserInfo() {
+    }
+
+    public UserInfo(String username, String password, boolean enabled, LocalDateTime createdTime, LocalDateTime updatedTime) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
+    }
 }

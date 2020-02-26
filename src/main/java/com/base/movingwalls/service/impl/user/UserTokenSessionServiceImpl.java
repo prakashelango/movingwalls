@@ -1,7 +1,8 @@
-package com.base.movingwalls.service.impl;
+package com.base.movingwalls.service.impl.user;
 
-import com.authentication.model.UserTokenSession;
-import com.authentication.repository.UserTokenSessionRepository;
+
+import com.base.movingwalls.model.user.UserTokenSession;
+import com.base.movingwalls.repository.UserTokenSessionRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,9 +35,6 @@ public class UserTokenSessionServiceImpl implements UserTokenSessionService {
             throw new UsernameNotFoundException("User " + username + "  mapping with token is not found in the database.");
         }
 
-        /**
-         * TODO Time zone of data base and client may be different.
-         */
         LocalDateTime currentSystemTime = LocalDateTime.now();
         ZonedDateTime currentZonedDateTime = currentSystemTime.atZone(ZoneId.systemDefault());
         long currentTimeInMillis = currentZonedDateTime.toInstant().toEpochMilli();

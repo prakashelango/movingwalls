@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +19,6 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-
 
 @Configuration
 @EnableAuthorizationServer
@@ -47,6 +45,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private ClientDetailsService clientDetailsService;
 
+    @Autowired
+    private JwtTokenStore jwtTokenStore;
+
+    @Autowired
+    private DefaultTokenServices defaultTokenServices;
+
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -67,36 +74,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     }
 
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-
-        LOGGER.info("Initializing JWT with public key: " + publicKey);
-
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(privateKey);
-
-        return converter;
-    }
-
-    @Bean
-    public JwtTokenStore tokenStore() {
-        return new JwtTokenStore(accessTokenConverter());
-    }
-
-    @Bean
-    @Primary
-    public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setClientDetailsService(clientDetailsService);
-        defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-        return defaultTokenServices;
-    }
 
     /**
      * Defines the authorization and token endpoints and the token services
-     *
      * @param endpoints
      * @throws Exception
      */
@@ -107,11 +87,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                .tokenStore(tokenStore())
-                .tokenServices(tokenServices())
-                .accessTokenConverter(accessTokenConverter());
+                .tokenStore(jwtTokenStore)
+                .tokenServices(defaultTokenServices)
+                .accessTokenConverter(jwtAccessTokenConverter);
     }
-
-
 
 }
