@@ -1,28 +1,11 @@
 package com.base.movingwalls.controller;
 
-import com.base.movingwalls.model.user.UserInfo;
-import com.base.movingwalls.repository.UserRepository;
-import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.async.DeferredResult;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-
-import static com.base.movingwalls.service.impl.user.UserServiceFacade.*;
-import static provider.DeferredResultProvider.createDeferredResult;
-import static provider.DeferredResultProvider.createDeferredResultTwoTrack;
-
-@RestController
+/*@RestController
 @RequestMapping("/oauth")
-@Api(value = "Api Provides Users Details")
+@Api(value = "Api Provides Users Details")*/
 public class UserController {
 
-    @Autowired
+    /*@Autowired
     private UserRepository userRepository;
 
     @ApiOperation(
@@ -91,5 +74,5 @@ public class UserController {
             @PathVariable final Long id) {
         return createDeferredResult(delete(id).with(userRepository), HttpStatus.OK);
     }
-
+*/
 }

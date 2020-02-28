@@ -15,10 +15,13 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/mater
 import {LoginComponent} from "./login";
 import {CampaignComponent} from "./campaign/campaign.component";
 import {appRoutingModule} from "./app.routing";
-import {BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider} from "./_helpers";
+import {BasicAuthInterceptor, ErrorInterceptor} from "./_helpers";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   imports: [
@@ -37,7 +40,10 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatInputModule
   ],
   declarations: [
     AppComponent,
@@ -50,7 +56,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
 
     // provider used to create fake backend
-    fakeBackendProvider
+
   ],
   exports: [
     SidenavComponent

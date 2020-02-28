@@ -69,7 +69,7 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
         });
     }
 
-    public void initIndex() throws InterruptedException {
+    public int initIndex() throws InterruptedException {
 
         final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
         fullTextEntityManager.createIndexer()
@@ -80,6 +80,7 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
                 .getNumberOfIndexedEntities(Campaign.class.getName());
 
         System.out.println("Campaign Size :: " + (dummyCampaignData().size() - 1) + "Index Size" + indexSize);
+        return indexSize;
     }
 
     private QueryBuilder getQueryBuilder() {

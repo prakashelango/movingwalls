@@ -6,7 +6,8 @@ import {AuthenticationService} from "../_services";
 
 @Component({
   selector: 'logincomponent',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
   }
 

@@ -45,15 +45,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private ClientDetailsService clientDetailsService;
 
-    @Autowired
-    private JwtTokenStore jwtTokenStore;
-
-    @Autowired
-    private DefaultTokenServices defaultTokenServices;
-
-    @Autowired
-    private JwtAccessTokenConverter jwtAccessTokenConverter;
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -70,26 +61,49 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .resourceIds("oauth2-resource")
                 .accessTokenValiditySeconds(expiration)
                 .refreshTokenValiditySeconds(expiration)
-                .secret("secret");
+                .secret(passwordEncoder().encode("secret"));
 
     }
 
+    public JwtAccessTokenConverter accessTokenConverter() {
+
+        LOGGER.info("Initializing JWT with public key: " + publicKey);
+
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey(privateKey);
+
+        return converter;
+    }
+
+    public JwtTokenStore tokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
+    }
+
+    public DefaultTokenServices tokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setClientDetailsService(clientDetailsService);
+        defaultTokenServices.setSupportRefreshToken(true);
+        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
+        return defaultTokenServices;
+    }
 
     /**
      * Defines the authorization and token endpoints and the token services
+     *
      * @param endpoints
-     * @throws Exception
      */
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
 
         endpoints
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                .tokenStore(jwtTokenStore)
-                .tokenServices(defaultTokenServices)
-                .accessTokenConverter(jwtAccessTokenConverter);
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PUT, HttpMethod.PATCH)
+                .tokenStore(tokenStore())
+                .tokenServices(tokenServices())
+                .accessTokenConverter(accessTokenConverter());
     }
+
 
 }
