@@ -25,11 +25,7 @@ public class CampaignInfo {
     @ApiModelProperty(notes = "Date of Campaign end. Accepts Date")
     private LocalDateTime endDate;
 
-    @ApiModelProperty(notes = "Campaign Location")
-    private String location;
-
     @ApiModelProperty(notes = "Provides the Report Status")
     private String report;
 
-    private CampaignFilter campaignFilter;
 }

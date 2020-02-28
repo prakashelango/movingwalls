@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @ApiModel(value = "Campaign Filter", description = "API Info Used to provide filter's for campaign.")
 public class CampaignFilter {
+
     @ApiModelProperty(notes = "Mode of Campaign ex: All, Completed, Ongoing, Historical")
     private String campaignMode;
 
@@ -23,4 +24,5 @@ public class CampaignFilter {
 
     @ApiModelProperty(notes = "Sortable by Campaign")
     private String sortby;
+
 }

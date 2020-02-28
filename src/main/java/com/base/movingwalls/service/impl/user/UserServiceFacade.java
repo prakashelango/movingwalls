@@ -39,12 +39,6 @@ public class UserServiceFacade implements UserDetailsService {
 
 	}
 
-	/*public List<User> findAll() {
-		List<User> list = new ArrayList<>();
-		userDao.findAll().iterator().forEachRemaining(list::add);
-		return list;
-	}*/
-
 	/**
 	 * @param id
 	 * @param userInfo
@@ -91,17 +85,4 @@ public class UserServiceFacade implements UserDetailsService {
 		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
 	}
 
-	/*public User findOne(long id) {
-		return userDao.findById(id).get();
-	}
-
-	@Override
-	public void delete(long id) {
-		userDao.deleteById(id);
-	}*/
-
-	/*@Override
-	public User save(User user) {
-		return userDao.save(user);
-	}*/
 }

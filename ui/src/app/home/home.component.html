@@ -1,75 +1,31 @@
-﻿<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark purple lighten-1" [containerInside]="false">
+﻿<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="card mt-4">
 
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
-  <!-- nav -->
-  <!-- <nav *ngIf="currentUser" class="navbar navbar-expand navbar-dark bg-dark">
-     <div class="navbar-nav">
-       <a class="nav-item nav-link" routerLink="/">Home</a>
-       <a (click)="logout()" class="nav-item nav-link">Logout</a>
-     </div>
-   </nav>-->
-  <!-- Collapsible content -->
-  <links>
+      <div class="card-body">
 
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
-      </li>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="users">
+          <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+        </ul>
+        <app-campaign-component></app-campaign-component>
 
-      <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a class="nav-link dropdown-toggle waves-light" dropdownToggle mdbWavesEffect mdbWavesEffect type="button">
-          Basic dropdown<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" href="#" mdbWavesEffect>Action</a>
-          <a class="dropdown-item waves-light" href="#" mdbWavesEffect>Another action</a>
-          <a class="dropdown-item waves-light" href="#" mdbWavesEffect>Something else here</a>
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" href="#" mdbWavesEffect>Separated link</a>
-        </div>
-      </li>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
 
-    </ul>
-    <!-- Links -->
 
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
-        <a class="nav-link">1
-          <mdb-icon fas icon="envelope"></mdb-icon>
-        </a>
-      </li>
-      <li class="nav-item avatar dropdown" dropdown>
-        <a class="nav-link dropdown-toggle waves-light" dropdownToggle mdbWavesEffect mdbWavesEffect type="button">
-          <img alt="" class="img-fluid rounded-circle z-depth-0"
-               src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"></a>
-        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" href="#" mdbWavesEffect>My account</a>
-          <a (click)="logout()" class="dropdown-item waves-light" href="" mdbWavesEffect>Log out</a>
-        </div>
-      </li>
-    </ul>
-  </links>
-  <!-- Collapsible content -->
-
-</mdb-navbar>
-<!--/.Navbar-->
-
-<div class="card mt-4">
-  <h4 class="card-header">Table Grid</h4>
-  <div class="card-body">
-    <h6>Users from secure api end point</h6>
-    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-    <ul *ngIf="users">
-      <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-    </ul>
-  </div>
-</div>
+<!-- <table class="table-items">
+  <td><img class="image-items" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" />
+  </td>
+  <td> Focus Media</td>
+  <td> 01-Aug - 31-Aug-2019</td>
+  <td>
+        <mat-icon class="iconStyle" style="padding-right: 0;">watch_later</mat-icon><label>published</label>
+  </td>
+  <td>Availabe in 2 days</td>
+</table> -->

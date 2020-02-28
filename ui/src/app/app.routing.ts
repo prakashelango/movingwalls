@@ -5,8 +5,8 @@ import {LoginComponent} from './login';
 import {AuthGuard} from './_helpers';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: '', component: LoginComponent},
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}

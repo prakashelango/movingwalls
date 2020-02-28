@@ -41,9 +41,6 @@ public class UserController {
         return createDeferredResult(findAll()
                 .with(userRepository), HttpStatus.OK);
     }
-    /*public List<User> listUser() {
-        return userService.findAll();
-    }*/
 
     @ApiOperation(
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -57,11 +54,6 @@ public class UserController {
         return createDeferredResult(save(userInfo).with(userRepository), HttpStatus.CREATED);
     }
 
-   /* @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public User create(@RequestBody User user) {
-        return userService.save(user);
-    }*/
-
     @ApiOperation(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -72,11 +64,6 @@ public class UserController {
             @PathVariable final Long id) {
         return createDeferredResultTwoTrack(find(id).with(userRepository), HttpStatus.OK);
     }
-
-    /*@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public User findOne(@PathVariable long id) {
-        return userService.findOne(id);
-    }*/
 
     @ApiOperation(
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -104,16 +91,5 @@ public class UserController {
             @PathVariable final Long id) {
         return createDeferredResult(delete(id).with(userRepository), HttpStatus.OK);
     }
-
-    /*@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public User update(@PathVariable long id, @RequestBody User user) {
-        user.setId(id);
-        return userService.save(user);
-    }
-
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable(value = "id") Long id) {
-        userService.delete(id);
-    }*/
 
 }
