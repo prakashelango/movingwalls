@@ -3,12 +3,9 @@ package com.base.movingwalls.campaignsearch;
 import com.base.movingwalls.model.campaign.Campaign;
 import com.base.movingwalls.repository.CampaignRepositoryEntityManagedImpl;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +17,6 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CampaignLucenceSearch {
 
     @Autowired(required = true)
@@ -34,7 +30,7 @@ public class CampaignLucenceSearch {
         campaigns = campaignRepository.dummyCampaignData();
     }
 
-    @Commit
+
     @Test
     public void testA_whenInitialTestDataInserted_thenSuccess() {
         campaignRepository.createDummyCampaign();

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from "../../services";
+import {User} from './../../models/user'
 
 @Component({
   selector: 'logincomponent',
@@ -15,13 +16,6 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
-  user = {
-    "userName": this.f.username.value,
-    "password": this.f.password.value,
-    "tokenId": "",
-    "valid": false,
-    "message": ""
-  };
 
   constructor(
       private formBuilder: FormBuilder,
@@ -58,16 +52,16 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    let newUser = new User(this.f.username.value, this.f.password.value, '', false, '');
     this.loading = true;
-    this.authenticationService.login(this.user)
+    this.authenticationService.login(newUser)
         .pipe(first())
         .subscribe(
             data => {
-              alert("yyy" + data);
               this.router.navigate(['campaign']);
             },
             error => {
-              this.error = error;
+              this.error = "Error Occured.";
               this.loading = false;
             });
   }

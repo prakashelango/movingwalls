@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {SharedService} from "../../shared.service";
+
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../../../services";
 
 @Component({
   selector: 'app-header',
@@ -15,9 +16,9 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private sharedService: SharedService, private router: Router) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
     //this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.isLoggedin = this.sharedService.isLoggedin();
+    this.isLoggedin = this.authenticationService.isLoggedin();
   }
 
   ngOnInit() {
@@ -38,8 +39,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    console.log("Logout");
-    this.sharedService.logout();// TODO Logout call to service
+    this.authenticationService.logout();// TODO Logout call to service
     this.router.navigate(['/login']);
   }
 }

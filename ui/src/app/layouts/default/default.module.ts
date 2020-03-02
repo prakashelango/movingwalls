@@ -15,6 +15,7 @@ import {LoginComponent} from "../../modules/login";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSortModule} from "@angular/material/sort";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
     declarations: [
@@ -27,17 +28,18 @@ import {MatSortModule} from "@angular/material/sort";
         RouterModule,
         SharedModule,
         MatSidenavModule,
-        MatDividerModule,
-        FlexLayoutModule,
-        MatCardModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatSortModule
+      MatDividerModule,
+      FlexLayoutModule,
+      MatCardModule,
+      MatPaginatorModule,
+      MatTableModule,
+      MatButtonModule,
+      MatFormFieldModule,
+      MatSelectModule,
+      ReactiveFormsModule,
+      MatIconModule,
+      MatSortModule,
+      MatProgressSpinnerModule
     ],
     providers: [
         DashboardService,
