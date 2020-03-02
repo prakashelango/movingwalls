@@ -31,26 +31,24 @@
                                     <div *ngIf="f.username.errors.required">Username is required</div>
                                 </div>
                             </div>
-                            <div class="group">
-                                <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control"
-                                       formControlName="password" placeholder="Password" type="password"/>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                    <div *ngIf="f.password.errors.required">Password is required</div>
-                                </div>
+                          <div class="group">
+                            <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control"
+                                   formControlName="password" placeholder="Password" type="password"/>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                              <div *ngIf="f.password.errors.required">Password is required</div>
                             </div>
+                          </div>
 
-                            <button [disabled]="loading" mat-raised-button>
-                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1">
-                                  <mat-progress-spinner
-                                    [mode]="indeterminate"
-                                    class="example-margin">
-                                </mat-progress-spinner>
+                          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1">
+                                <mat-spinner></mat-spinner>
                                 </span>
-                              Login
-                            </button>
-                            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+                          <button [disabled]="loading" mat-raised-button>
+                            Login
+                          </button>
+                          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                         </form>
                     </div>
                 </div>
