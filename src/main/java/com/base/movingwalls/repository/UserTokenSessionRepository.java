@@ -4,6 +4,8 @@ import com.base.movingwalls.model.user.UserTokenSession;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserTokenSessionRepository extends CrudRepository<UserTokenSession, Long> {
 
@@ -13,6 +15,6 @@ public interface UserTokenSessionRepository extends CrudRepository<UserTokenSess
      * @param username
      * @return @{@link UserTokenSession}
      */
-    UserTokenSession findOneByUsername(String username);
+    Optional<UserTokenSession> findOneByUsername(String username);
 
 }

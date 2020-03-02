@@ -1,6 +1,8 @@
 package com.base.movingwalls.model.user;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -8,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user_token_session")
+@Data
 public class UserTokenSession {
 
     @Id
@@ -52,34 +55,6 @@ public class UserTokenSession {
     @PreUpdate
     protected void onUpdate() {
         updatedTime = LocalDateTime.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public Long getExpiryTime() {
-        return expiryTime;
-    }
-
-    public LocalDateTime getCreatedTime() {
-        return createdTime;
-    }
-
-    public LocalDateTime getUpdatedTime() {
-        return updatedTime;
     }
 
     @Override

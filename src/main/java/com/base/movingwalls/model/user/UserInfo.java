@@ -1,17 +1,12 @@
 package com.base.movingwalls.model.user;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-public class UserInfo implements UserDetails {
+public class UserInfo {
 
     static final long serialVersionUID = 1L;
 
@@ -20,6 +15,9 @@ public class UserInfo implements UserDetails {
 
     @ApiModelProperty(notes = "user name")
     private String username;
+
+    @ApiModelProperty(notes = "Role of User")
+    private String role;
 
     @ApiModelProperty(notes = "User password")
     private String password;
@@ -42,44 +40,6 @@ public class UserInfo implements UserDetails {
     @PreUpdate
     protected void onUpdate() {
         updatedTime = LocalDateTime.now();
-    }
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-        return authorities;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     public Long getId() {

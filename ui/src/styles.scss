@@ -1,8 +1,119 @@
 /* You can add global styles to this file, and also import other style files */
-a {
-  cursor: pointer
+
+html, body {
+  height: 100%;
 }
 
 body {
-  background-color: cornsilk;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: small;
+}
+
+/*body {
+   margin: 0;
+   background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+   background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+   background-attachment: fixed;
+   background-repeat: no-repeat;
+
+   font-family: 'Vibur', cursive;
+   font-family: 'Abel', sans-serif;
+   opacity: .95;
+   font-size: smaller;
+ }
+
+.mat-drawer-container{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+.mat-card{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+
+.mat-elevation-z8{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+  box-shadow: none;
+}
+
+.mat-card:not([class*="mat-elevation-z"]){
+  box-shadow: none;
+}
+
+.mat-paginator{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+
+.mat-toolbar.mat-primary{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+
+.mat-drawer-content{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+.mat-drawer-side{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}
+.mat-table{
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: 'Vibur', cursive;
+  font-family: 'Abel', sans-serif;
+  opacity: .95;
+}*/
+
+.mat-list-base .mat-list-item {
+  font-size: small;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

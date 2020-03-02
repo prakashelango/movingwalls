@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button (click)="toggleSideBar()" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span> <img class="imgsize" src="assets/img/MW-social.png"></span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20px">
+                <span class="spacer"></span>
+                <button mat-icon-button type="button">
+                    <mat-icon aria-label="Grid">blur_on</mat-icon>
+                </button>
+                <button mat-icon-button type="button">
+                    <mat-icon aria-label="Notification">notifications_active</mat-icon>
+                </button>
+                <button mat-icon-button type="button">
+                    <mat-icon aria-label="Location">donut_large</mat-icon>
+                </button>
+                <li>
+                    <button [matMenuTriggerFor]="menu" mat-button>
+                        <mat-icon>person_outline</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button (click)="logout()" mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            Sign out
+                        </button>
+                    </mat-menu>
+
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

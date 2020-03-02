@@ -1,0 +1,110 @@
+input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 400px;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* LABEL ======================================= */
+label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+  position: relative;
+  display: block;
+  width: 416px;
+}
+
+.bar:before, .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width: 50%;
+}
+
+.group {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+.invalid-feedback {
+  color: red;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button {
+  width: 105px;
+  color: white;
+  background-color: #084aa0;
+}
+
+.imgsize {
+  width: 600px;
+  height: 550px;
+
+}
+
+.backdrop {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+}
+
+.logoimg {
+  width: 188px;
+  height: 73px;
+  margin-top: 14px;
+}
+
+.gradcolored {
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #3e49f0 100%);
+  background-image: linear-gradient(to top, #fff 0%, #3e49f0 100%);;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: white;
+  opacity: .95;
+  font-size: larger;
+}

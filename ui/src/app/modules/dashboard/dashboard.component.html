@@ -1,0 +1,130 @@
+<!--<div>
+    <app-widget-area [data]="bigChart"></app-widget-area>
+</div>
+
+<br>
+
+<mat-divider></mat-divider>
+
+<br>-->
+
+<div class="stats-cards" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px"
+     xmlns="http://www.w3.org/1999/html">
+    <mat-card fxFlex="40">
+        <mat-card-title>CAMPAIGNS</mat-card-title>
+        <div class="stats-cards" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="7px">
+            <button mat-button>ALL</button>
+            <button mat-button>ONGOING</button>
+            <button mat-button>COMPLETED</button>
+            <button mat-button>HISTORICAL</button>
+        </div>
+    </mat-card>
+
+    <mat-card fxFlex="60" fxLayoutAlign="flex-end">
+        <mat-card-title>
+        </mat-card-title>
+        <div class="stats-cards" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="7px">
+            <button class="gradcolored" mat-button>Add Campaign</button>
+        </div>
+    </mat-card>
+</div>
+
+
+<br>
+
+<div class="stats-cards" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <mat-card class="matcardheight" fxFlex="40">
+        <div class="group">
+            <input (keyup)="applyFilter($event)" placeholder="Search" type="text">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>123 Campaigns</label>
+        </div>
+    </mat-card>
+    <mat-card fxFlex="20">
+        <mat-label>Filter by locations</mat-label>
+        <mat-form-field>
+            <mat-label>Maharastra</mat-label>
+            <mat-select name="food">
+                <mat-option value="Maharastra">
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card>
+    <mat-card fxFlex="20">
+        <mat-label>Filter by campaign date</mat-label>
+        <mat-form-field>
+            <mat-label>Last Month</mat-label>
+            <mat-select name="date">
+                <mat-option value="Last Month">
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card>
+    <mat-card fxFlex="20">
+        <mat-label>Sort by</mat-label>
+        <mat-form-field>
+            <mat-label>Completed First</mat-label>
+            <mat-select name="sortby">
+                <mat-option value="Completed First">
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-card>
+</div>
+
+<br>
+<!--
+<mat-divider></mat-divider>
+
+<br>-->
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <div fxFlex="100">
+        <div class="mat-elevation-z8">
+            <table [dataSource]="dataSource" class="table-items" mat-table matSort>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
+                    <td *matCellDef="let element" mat-cell><img class="image-items" mat-card-image
+                                                                src="https://material.angular.io/assets/img/examples/shiba2.jpg"/>{{element.name}}
+                    </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="duration">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Duration</th>
+                    <td *matCellDef="let element" mat-cell> {{element.duration}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Status</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <mat-icon class="iconStyle">watch_later</mat-icon>
+                        {{element.status}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="report">
+                    <th *matHeaderCellDef mat-header-cell></th>
+                    <td *matCellDef="let element" mat-cell> {{element.report}} </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+    </div>
+    <!--<div fxFlex="40">
+        <app-widget-pie [data]="pieChart"></app-widget-pie>
+    </div>-->
+</div>
+
+<br>
+<br>
+<br>
