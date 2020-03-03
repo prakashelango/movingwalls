@@ -1,5 +1,6 @@
 package com.base.movingwalls.controller;
 
+import com.base.movingwalls.model.campaign.CampaignFilter;
 import com.base.movingwalls.model.campaign.CampaignInfo;
 import com.base.movingwalls.repository.CampaignRepositoryEntityManagedImpl;
 import io.swagger.annotations.*;
@@ -40,22 +41,17 @@ public class CampaignController {
             notes = "Search Campaign"
     )
     @ApiResponses({
-            @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK"),
-            @ApiResponse(code = HttpServletResponse.SC_FOUND, message = "Data Found"),
-            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Data not found"),
-            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request"),
-            @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error")
+            @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK" ),
+            @ApiResponse(code = HttpServletResponse.SC_FOUND, message = "Data Found" ),
+            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Data not found" ),
+            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request" ),
+            @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error" )
     })
-    @RequestMapping(value = "/search/{searchtext}/{sortField}/{sortOrder}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public DeferredResult<ResponseEntity<List<CampaignInfo>>> search(
-            @ApiParam(value = "Search Data", name = "searchtext")
-            @PathVariable final String searchtext,
-            @ApiParam(value = "Sort Field", name = "sortfield")
-            @PathVariable final String sortField,
-            @ApiParam(value = "Sort Order", name = "sortOrder")
-            @PathVariable final String sortOrder) {
-        System.out.println(searchtext);
-        return createDeferredResult(searchByCampaignData(searchtext, sortField, sortOrder).with(managed), HttpStatus.OK);
+            @ApiParam(value = "Sort Order", name = "sortOrder" )
+            @RequestBody final CampaignFilter campaignFilter) {
+        return createDeferredResult(searchByCampaignData(campaignFilter).with(managed), HttpStatus.OK);
     }
 
     @ApiOperation(
@@ -65,19 +61,17 @@ public class CampaignController {
             notes = "Get All Campaign Data"
     )
     @ApiResponses({
-            @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK"),
-            @ApiResponse(code = HttpServletResponse.SC_FOUND, message = "Data Found"),
-            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Data not found"),
-            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request"),
-            @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error")
+            @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK" ),
+            @ApiResponse(code = HttpServletResponse.SC_FOUND, message = "Data Found" ),
+            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Data not found" ),
+            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request" ),
+            @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error" )
     })
-    @RequestMapping(value = "/{sortField}/{sortOrder}", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.POST)
     public DeferredResult<ResponseEntity<List<CampaignInfo>>> getAllCampaignData(
-            @ApiParam(value = "Sort Field", name = "sortfield")
-            @PathVariable final String sortField,
-            @ApiParam(value = "Sort Order", name = "sortOrder")
-            @PathVariable final String sortOrder) {
-        return createDeferredResult(findAllCampaignData(sortField, sortOrder).with(managed), HttpStatus.OK);
+            @ApiParam(value = "Sort Order", name = "sortOrder" )
+            @RequestBody final CampaignFilter campaignFilter) {
+        return createDeferredResult(findAllCampaignData(campaignFilter).with(managed), HttpStatus.OK);
     }
 }
 

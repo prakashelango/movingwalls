@@ -4,6 +4,9 @@ import com.base.movingwalls.common.core.Builder;
 import com.base.movingwalls.model.campaign.Campaign;
 import com.base.movingwalls.model.campaign.CampaignInfo;
 
+import java.time.LocalDateTime;
+import java.util.function.Function;
+
 public class CampaignConverter {
 
     public static Campaign convertToCampaign(final CampaignInfo source) {
@@ -24,9 +27,12 @@ public class CampaignConverter {
     }
 
 
+    private static Function<LocalDateTime, String> formatDatebyDateMonthYear =
+            localDateTime -> localDateTime.getDayOfMonth() + " " + localDateTime.getMonth() + " " + localDateTime.getYear();
+
     public static CampaignInfo convertToInfo(final Campaign source) {
         return Builder.of(CampaignInfo.class)
-                .with(CampaignInfo::getDuration, source.getStartDate().toString() + " - " + source.getEndDate().toString())
+                .with(CampaignInfo::getDuration, formatDatebyDateMonthYear.apply(source.getStartDate()) + " - " + formatDatebyDateMonthYear.apply(source.getEndDate()))
                 .with(CampaignInfo::getEndDate, source.getEndDate())
                 .with(CampaignInfo::getStartDate, source.getStartDate())
                 .with(CampaignInfo::getName, source.getName())

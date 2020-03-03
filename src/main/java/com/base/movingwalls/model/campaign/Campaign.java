@@ -41,10 +41,16 @@ public class Campaign {
     @Field(termVector = TermVector.YES)
     private LocalDateTime endDate;
 
+    @Field
     private String report;
 
     public Campaign() {
     }
+
+    /*@PrePersist
+    protected void () {
+        duration = CampaignConverter.formatDatebyDateMonthYear.apply();
+    }*/
 
     public Campaign(String name, String duration, String status, LocalDateTime startDate, LocalDateTime endDate, String report) {
         this.name = name;

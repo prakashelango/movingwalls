@@ -1,6 +1,7 @@
 package com.base.movingwalls.repository;
 
 import com.base.movingwalls.model.campaign.Campaign;
+import com.base.movingwalls.model.campaign.CampaignFilter;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
@@ -95,38 +96,45 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
                 .get();
     }
 
-    public List<Campaign> searchByCampaignData(final String searchText, final Class sortClass, final String sortField, final String sortOrder) {
-
+    public List<Campaign> searchByCampaignData(final CampaignFilter campaignFilter) {
+        System.out.println(campaignFilter.getCampaignSearchKeyWord());
         final Query keywordQuery = getQueryBuilder()
                 .keyword()
-                .onFields("name", "duration", "status", "report")
-                .matching(searchText)
+                .onFields("name", "duration", "status", "report" )
+                .matching(campaignFilter.getCampaignSearchKeyWord())
                 .createQuery();
 
-        final List<Campaign> results = getJpaQuery(keywordQuery, sortClass, sortField, sortOrder).getResultList();
+        final List<Campaign> results = getJpaQuery(keywordQuery, campaignFilter.getSortFieldType(), campaignFilter.getSortby(), campaignFilter.getSortbyOrder()).getResultList();
         System.out.println(results);
         return results;
     }
 
-    public List<Campaign> fetchAllCampaignData(final Class sortClass, final String sortField, final String sortOrder) {
+    public List<Campaign> fetchAllCampaignData(final CampaignFilter campaignFilter) {
         final Query keywordQuery = getQueryBuilder().all().createQuery();
 
-        final List<Campaign> results = getJpaQuery(keywordQuery, sortClass, sortField, sortOrder).getResultList();
+        final List<Campaign> results = getJpaQuery(keywordQuery, campaignFilter.getSortFieldType(), campaignFilter.getSortby(), campaignFilter.getSortbyOrder()).getResultList();
         return results;
     }
 
-    private FullTextQuery getJpaQuery(final Query luceneQuery, final Class sortClass, final String sortField, final String sortOrder) {
+    private FullTextQuery getJpaQuery(final Query luceneQuery, final String fieldType, final String sortField, final String sortOrder) {
         return Search.getFullTextEntityManager(em).createFullTextQuery(luceneQuery, Campaign.class)
-                .setSort(sort(sortClass, sortField, sortOrder));
+                .setSort(new Sorter().getSortbyType(fieldType, sortField, sortOrder));
     }
 
-    public Sort sort(Class sortClass, String sortField, String sortOrder) {
-        return new Sort(
-                new SortField(sortField, SortField.Type.STRING, false)
-        );
-        /*return  getQueryBuilder()
-                .sort()
-                .byNative(sortClass.getName()+"."+sortField, "{'order':'"+sortOrder+"'}")
-                .createSort();*/
+
+}
+
+class Sorter {
+    public Sort getSortbyType(String fieldType, String sortField, String sortOrder) {
+        switch (fieldType) {
+            case "Number":
+                return new Sort(new SortField(sortField, SortField.Type.LONG, !sortOrder.equals("asc" )));
+            case "Date":
+                return new Sort(new SortField(sortField, SortField.Type.CUSTOM, !sortOrder.equals("asc" )));
+            default:
+                return new Sort(new SortField(sortField, SortField.Type.STRING, !sortOrder.equals("asc" )));
+        }
     }
+
+
 }
