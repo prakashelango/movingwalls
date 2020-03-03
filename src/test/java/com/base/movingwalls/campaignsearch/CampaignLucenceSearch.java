@@ -48,7 +48,7 @@ public class CampaignLucenceSearch {
     @Test
     public void testE_whenKeywordSearchOnName_thenCorrectMatches() {
         List<Campaign> expected = campaigns;
-        List<Campaign> results = campaignRepository.searchByCampaignData("Orchard Campaign");
+        List<Campaign> results = campaignRepository.searchByCampaignData("Orchard Campaign", Campaign.class, "name", "asc");
 
         assertThat(results, containsInAnyOrder(expected.toArray()));
     }
@@ -56,7 +56,7 @@ public class CampaignLucenceSearch {
     @Test
     public void testE_PullAllRecords_thenMatches_with_Index() {
         List<Campaign> expected = campaigns;
-        List<Campaign> results = campaignRepository.fetchAllCampaignData();
+        List<Campaign> results = campaignRepository.fetchAllCampaignData(Campaign.class, "name", "desc");
 
         assertThat(results, containsInAnyOrder(expected.toArray()));
     }

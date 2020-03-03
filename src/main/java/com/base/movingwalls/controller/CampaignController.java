@@ -46,12 +46,16 @@ public class CampaignController {
             @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request"),
             @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error")
     })
-    @RequestMapping(value = "/search/{searchtext}", method = RequestMethod.GET)
+    @RequestMapping(value = "/search/{searchtext}/{sortField}/{sortOrder}", method = RequestMethod.GET)
     public DeferredResult<ResponseEntity<List<CampaignInfo>>> search(
             @ApiParam(value = "Search Data", name = "searchtext")
-            @PathVariable final String searchtext) {
+            @PathVariable final String searchtext,
+            @ApiParam(value = "Sort Field", name = "sortfield")
+            @PathVariable final String sortField,
+            @ApiParam(value = "Sort Order", name = "sortOrder")
+            @PathVariable final String sortOrder) {
         System.out.println(searchtext);
-        return createDeferredResult(searchByCampaignData(searchtext).with(managed), HttpStatus.OK);
+        return createDeferredResult(searchByCampaignData(searchtext, sortField, sortOrder).with(managed), HttpStatus.OK);
     }
 
     @ApiOperation(
@@ -67,9 +71,13 @@ public class CampaignController {
             @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request"),
             @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error")
     })
-    @RequestMapping(method = RequestMethod.GET)
-    public DeferredResult<ResponseEntity<List<CampaignInfo>>> getAllCampaignData() {
-        return createDeferredResult(findAllCampaignData().with(managed), HttpStatus.OK);
+    @RequestMapping(value = "/{sortField}/{sortOrder}", method = RequestMethod.GET)
+    public DeferredResult<ResponseEntity<List<CampaignInfo>>> getAllCampaignData(
+            @ApiParam(value = "Sort Field", name = "sortfield")
+            @PathVariable final String sortField,
+            @ApiParam(value = "Sort Order", name = "sortOrder")
+            @PathVariable final String sortOrder) {
+        return createDeferredResult(findAllCampaignData(sortField, sortOrder).with(managed), HttpStatus.OK);
     }
 }
 

@@ -2,9 +2,8 @@ package com.base.movingwalls.model.campaign;
 
 import com.base.movingwalls.common.core.Builder;
 import lombok.Data;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.TermVector;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,13 +18,21 @@ public class Campaign {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Field(termVector = TermVector.YES)
+    @Fields({
+            @Field,
+            @Field(name = "name", analyze = Analyze.NO, store = Store.NO, index = Index.NO)
+    })
+    @SortableField(forField = "name")
     private String name;
 
     @Field(termVector = TermVector.YES)
     private String duration;
 
-    @Field(termVector = TermVector.YES)
+    @Fields({
+            @Field,
+            @Field(name = "status", analyze = Analyze.NO, store = Store.NO, index = Index.NO)
+    })
+    @SortableField(forField = "status")
     private String status;
 
     @Field(termVector = TermVector.YES)
@@ -34,7 +41,6 @@ public class Campaign {
     @Field(termVector = TermVector.YES)
     private LocalDateTime endDate;
 
-    @Field
     private String report;
 
     public Campaign() {

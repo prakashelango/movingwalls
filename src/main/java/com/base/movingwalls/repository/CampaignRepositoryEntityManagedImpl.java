@@ -2,6 +2,8 @@ package com.base.movingwalls.repository;
 
 import com.base.movingwalls.model.campaign.Campaign;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
@@ -93,7 +95,7 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
                 .get();
     }
 
-    public List<Campaign> searchByCampaignData(final String searchText) {
+    public List<Campaign> searchByCampaignData(final String searchText, final Class sortClass, final String sortField, final String sortOrder) {
 
         final Query keywordQuery = getQueryBuilder()
                 .keyword()
@@ -101,20 +103,30 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
                 .matching(searchText)
                 .createQuery();
 
-        final List<Campaign> results = getJpaQuery(keywordQuery).getResultList();
+        final List<Campaign> results = getJpaQuery(keywordQuery, sortClass, sortField, sortOrder).getResultList();
         System.out.println(results);
         return results;
     }
 
-    public List<Campaign> fetchAllCampaignData() {
+    public List<Campaign> fetchAllCampaignData(final Class sortClass, final String sortField, final String sortOrder) {
         final Query keywordQuery = getQueryBuilder().all().createQuery();
 
-        final List<Campaign> results = getJpaQuery(keywordQuery).getResultList();
-        System.out.println(results);
+        final List<Campaign> results = getJpaQuery(keywordQuery, sortClass, sortField, sortOrder).getResultList();
         return results;
     }
 
-    private FullTextQuery getJpaQuery(final Query luceneQuery) {
-        return Search.getFullTextEntityManager(em).createFullTextQuery(luceneQuery, Campaign.class);
+    private FullTextQuery getJpaQuery(final Query luceneQuery, final Class sortClass, final String sortField, final String sortOrder) {
+        return Search.getFullTextEntityManager(em).createFullTextQuery(luceneQuery, Campaign.class)
+                .setSort(sort(sortClass, sortField, sortOrder));
+    }
+
+    public Sort sort(Class sortClass, String sortField, String sortOrder) {
+        return new Sort(
+                new SortField(sortField, SortField.Type.STRING, false)
+        );
+        /*return  getQueryBuilder()
+                .sort()
+                .byNative(sortClass.getName()+"."+sortField, "{'order':'"+sortOrder+"'}")
+                .createSort();*/
     }
 }

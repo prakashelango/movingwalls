@@ -12,7 +12,7 @@ export class DashboardService {
 
     fetchCampaignData(username: string, password: string) {
         console.log('user' + username);
-        return this.http.get<any>(`${environment.serviceApiUrl}/campaign`);
+        return this.http.get<any>(`${environment.serviceApiUrl}/campaign/name/asc`);
     }
 
 }
