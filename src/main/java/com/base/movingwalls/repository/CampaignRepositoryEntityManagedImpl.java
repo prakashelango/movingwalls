@@ -101,7 +101,7 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
     }
 
     public List<Campaign> searchByCampaignData(final CampaignFilter campaignFilter) {
-        Optional<List<Campaign>> cam = Optional.ofNullable(campaignFilter.getCampaignStatus())
+        /*Optional<List<Campaign>> cam = Optional.ofNullable(campaignFilter.getCampaignStatus())
                 .filter(status -> status.length()>0 && !status.isEmpty())
                 .map(status -> getQueryBuilder()
                         .keyword()
@@ -109,9 +109,10 @@ public class CampaignRepositoryEntityManagedImpl implements CampaignRepositoryEn
                         .matching(status)
                         .createQuery())
                 .map(statusQuery -> getJpaQuery(statusQuery, campaignFilter).getResultList());
-        System.out.println(cam);
+        System.out.println(cam);*/
 
-        return Optional.of(campaignFilter.getCampaignSearchKeyWord())
+        return Optional.ofNullable(campaignFilter.getCampaignSearchKeyWord())
+                .filter(seachKey -> seachKey.length() > 0)
                 .map(searchKey -> getQueryBuilder()
                         .keyword()
                         .onFields("name", "duration", "status", "report")
