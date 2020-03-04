@@ -23,14 +23,4 @@ public class CampaignFacade {
                 .getPromise());
     }
 
-    /**
-     * @return
-     */
-    public static Reader<CampaignRepositoryEntityManagedImpl, Promise<List<CampaignInfo>>> findAllCampaignData(final CampaignFilter campaignFilter) {
-        return Reader.of(managedImpl -> React.of(() -> managedImpl.fetchAllCampaignData(campaignFilter))
-                .then(FunctionUtils.asList(CampaignConverter::convertToInfo))
-                .getPromise());
-    }
-
-
 }

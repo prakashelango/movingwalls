@@ -15,7 +15,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static com.base.movingwalls.service.impl.campaign.CampaignFacade.findAllCampaignData;
 import static com.base.movingwalls.service.impl.campaign.CampaignFacade.searchByCampaignData;
 import static provider.DeferredResultProvider.createDeferredResult;
 
@@ -31,7 +30,7 @@ public class CampaignController {
     @PostConstruct
     public void init() throws InterruptedException {
         managed.createDummyCampaign();
-        managed.initIndex();
+        managed.createIndex();
     }
 
     @ApiOperation(
@@ -54,25 +53,6 @@ public class CampaignController {
         return createDeferredResult(searchByCampaignData(campaignFilter).with(managed), HttpStatus.OK);
     }
 
-    @ApiOperation(
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            value = "Get All Campaign Data",
-            notes = "Get All Campaign Data"
-    )
-    @ApiResponses({
-            @ApiResponse(code = HttpServletResponse.SC_OK, message = "OK" ),
-            @ApiResponse(code = HttpServletResponse.SC_FOUND, message = "Data Found" ),
-            @ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Data not found" ),
-            @ApiResponse(code = HttpServletResponse.SC_BAD_REQUEST, message = "Invalid request" ),
-            @ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "Internal server error" )
-    })
-    @RequestMapping(method = RequestMethod.POST)
-    public DeferredResult<ResponseEntity<List<CampaignInfo>>> getAllCampaignData(
-            @ApiParam(value = "Sort Order", name = "sortOrder" )
-            @RequestBody final CampaignFilter campaignFilter) {
-        return createDeferredResult(findAllCampaignData(campaignFilter).with(managed), HttpStatus.OK);
-    }
 }
 
 

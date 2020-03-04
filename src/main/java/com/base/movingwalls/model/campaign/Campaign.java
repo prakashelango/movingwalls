@@ -20,25 +20,30 @@ public class Campaign {
 
     @Fields({
             @Field,
-            @Field(name = "name", analyze = Analyze.NO, store = Store.NO, index = Index.NO)
+            @Field(name = "name_sort", analyze = Analyze.NO, store = Store.YES, index = Index.YES)
     })
-    @SortableField(forField = "name")
+    @SortableField(forField = "name_sort")
     private String name;
 
     @Field(termVector = TermVector.YES)
+    @Fields({
+            @Field,
+            @Field(name = "duration_sort", analyze = Analyze.NO, store = Store.YES, index = Index.YES)
+    })
+    @SortableField(forField = "duration_sort")
     private String duration;
 
     @Fields({
             @Field,
-            @Field(name = "status", analyze = Analyze.NO, store = Store.NO, index = Index.NO)
+            @Field(name = "status_sort", analyze = Analyze.NO, store = Store.YES, index = Index.YES)
     })
-    @SortableField(forField = "status")
+    @SortableField(forField = "status_sort")
     private String status;
 
-    @Field(termVector = TermVector.YES)
+    @Field(analyze = Analyze.NO, store = Store.NO, index = Index.NO)
     private LocalDateTime startDate;
 
-    @Field(termVector = TermVector.YES)
+    @Field(analyze = Analyze.NO, store = Store.NO, index = Index.NO)
     private LocalDateTime endDate;
 
     @Field

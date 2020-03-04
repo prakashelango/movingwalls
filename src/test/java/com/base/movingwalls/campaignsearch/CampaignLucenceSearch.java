@@ -41,7 +41,7 @@ public class CampaignLucenceSearch {
     @Test
     public void testB_whenIndexInitialized_thenCorrectIndexSize() throws InterruptedException {
 
-        int indexSize = campaignRepository.initIndex();
+        int indexSize = campaignRepository.createIndex();
 
         assertEquals(campaigns.size() - 1, indexSize);
     }
@@ -61,12 +61,5 @@ public class CampaignLucenceSearch {
         assertThat(results, containsInAnyOrder(expected.toArray()));
     }
 
-    @Test
-    public void testE_PullAllRecords_thenMatches_with_Index() {
-        List<Campaign> expected = campaigns;
-        List<Campaign> results = campaignRepository.fetchAllCampaignData(CreateCampaignTestFilter());
-
-        assertThat(results, containsInAnyOrder(expected.toArray()));
-    }
 
 }
